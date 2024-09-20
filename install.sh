@@ -1,4 +1,5 @@
 #!/bin/bash
+USER=ramon
 
 # Update and install necessary packages
 apt-get update
@@ -6,36 +7,26 @@ apt-get upgrade -y
 apt-get install -y \
         zsh \
         stow \
-        neovim \
-        curl \
-        git
+        neovim
 
 # Install required font
-sudo -u youruser bash <<EOF
-mkdir -p ~/.local/share/fonts
-wget -P ~/.local/share/fonts https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip
-cd ~/.local/share/fonts
-unzip FiraCode.zip
-rm FiraCode.zip
-fc-cache -fv
-cd ~/.dotfiles
-EOF
+sudo -u $USER mkdir -p /home/$USER/.local/share/fonts
+sudo -u $USER wget -P /home/$USER/.local/share/fonts https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip
+sudo -u $USER unzip /home/$USER/.local/share/fonts/FiraCode.zip -d /home/$USER/.local/share/fonts
+sudo -u $USER rm /home/$USER/.local/share/fonts/FiraCode.zip
+sudo -u $USER fc-cache -fv
 
-# Install Oh My Zsh for a non-root user
-sudo -u youruser bash <<EOF
-wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O install-oh-my-zsh.sh
-chmod +x install-oh-my-zsh.sh
-RUNZSH=no ./install-oh-my-zsh.sh  # Prevents switching shell automatically
-rm ./install-oh-my-zsh.sh
-EOF
+# Install Oh My Zsh for the non-root user
+sudo -u $USER wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O /home/$USER/install-oh-my-zsh.sh
+sudo -u $USER chmod +x /home/$USER/install-oh-my-zsh.sh
+sudo -u $USER RUNZSH=no /home/$USER/install-oh-my-zsh.sh  # Prevents switching shell automatically
+sudo -u $USER rm /home/$USER/install-oh-my-zsh.sh
 
 # Install oh-my-zsh plugins as the non-root user
-sudo -u youruser git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-/home/youruser/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+sudo -u $USER git clone https://github.com/zsh-users/zsh-autosuggestions /home/$USER/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
-# Use stow to set up symlinks
-sudo -u youruser bash <<EOF
-cd ~/.dotfiles
-stow --adopt *
-git restore .
-source ~/.zshrc
-EOF
+# Set up symlinks using stow and reset changes to dotfiles
+stow --adopt -d /home/$USER/.dotfiles -t /home/$USER
+git -C /home/$USER/.dotfiles restore .
+
+source /home/$USER/.zshrc
