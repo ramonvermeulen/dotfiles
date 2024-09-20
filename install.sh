@@ -3,9 +3,9 @@
 apt-get update
 apt-get upgrade
 apt-get install \
-	zsh \
-	stow \
-	neovim
+        zsh \
+        stow \
+        neovim
 
 # install required font
 wget -P ~/.local/share/fonts https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip \
@@ -15,7 +15,10 @@ wget -P ~/.local/share/fonts https://github.com/ryanoasis/nerd-fonts/releases/do
 && fc-cache -fv
 
 # install oh-my-zsh
-sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O install-oh-my-zsh.sh
+chmod +x install-oh-my-zsh.sh
+./install-oh-my-zsh.sh
+rm ./install-oh-my-zsh.sh
 
 # install oh-my-zsh plugins
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
@@ -27,3 +30,4 @@ stow --adopt *
 git restore .
 
 source ~/.zshrc
+r
