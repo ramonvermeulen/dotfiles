@@ -5,8 +5,9 @@
     state: present
     update-cache: yes
   become: true
+
 - name: Get current default shell of the user
-  command: getent passwd "{{ target_user }}"
+  command: getent passwd "{{ host_user }}"
   register: user_info
   changed_when: false
 
