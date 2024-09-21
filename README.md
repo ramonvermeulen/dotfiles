@@ -2,7 +2,7 @@
 Repository containing my personal .dotfiles configuration, making it easy to set-up and synchronize 
 my developer environment across machines. This set-up is hugely inspired by the [**TechDufus**][2] dotfiles 
 set-up which can be found [**here**][2]. Basically most concepts and config is copied from his repo 
-and modified / tweaked to my own liking. The goal is to provide a fully automated and maintainable
+and modified / tweaked / stripped to my own liking. The goal is to provide a fully automated and maintainable
 `Ubuntu` development environment that works seamlessly on both WSL (Windows Subsystem for Linux) and 
 standard Ubuntu installations.
 
