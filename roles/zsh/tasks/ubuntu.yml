@@ -10,3 +10,4 @@
   user:
     name: "{{ host_user }}"
     shell: /bin/zsh
+  become: true
