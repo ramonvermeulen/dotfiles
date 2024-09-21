@@ -5,9 +5,17 @@
     state: present
     update-cache: yes
   become: true
-- name: Zsh | Ensure zsh is default shell
+- name: Get current default shell of the user
+  command: getent passwd "{{ target_user }}"
+  register: user_info
+  changed_when: false
+
+- name: Zsh | Extract current shell
+  set_fact:
+    current_shell: "{{ user_info.stdout.split(':')[-1] | trim }}"
+
+- name: Zsh | Change default shell to zsh if not already set
   user:
     name: "{{ host_user }}"
-    shell: "/bin/zsh"
-  become: true
-  when: ansible_facts.shell != '/bin/zsh'
+    shell: /bin/zsh
+  when: current_shell != '/bin/zsh'
