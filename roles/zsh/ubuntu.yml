@@ -1,0 +1,12 @@
+---
+- name: Zsh | Ensure zsh is installed
+  apt:
+    name: "zsh"
+    state: present
+    update-cache: yes
+  become: true
+- name: Zsh | Ensure zsh is default shell
+  user:
+    name: "{{ ansible_user }}"
+    shell: "/user/bin/zsh"
+  become: true
