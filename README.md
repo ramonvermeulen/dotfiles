@@ -8,6 +8,10 @@ standard Ubuntu installations.
 
 # Ansible
 
+# Installation
+```bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/ramonvermeulen/dotfiles/main/bin/dotfiles)"
+```
 
 <!-- These are the reference links used in this document -->
 [1]: https://github.com/TechDufus/

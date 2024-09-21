@@ -7,6 +7,6 @@
   become: true
 - name: Zsh | Ensure zsh is default shell
   user:
-    name: "{{ ansible_user }}"
+    name: "{{ host_user }}"
     shell: "/user/bin/zsh"
   become: true
