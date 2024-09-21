@@ -17,7 +17,7 @@
     path: "{{ ansible_user_dir }}/.oh-my-zsh"
   register: ohmyzsh
 
-- name: "Zsh | Register oh-my-bash state"
+- name: "Zsh | Register oh-my-zsh state"
   ansible.builtin.set_fact:
     ohmyzsh_is_installed: "{{ ohmyzsh.stat.exists }}"
 
@@ -35,7 +35,7 @@
         force: true
         mode: "0755"
       notify:
-        - "Zsh | Cleanup oh-my-bash install script"
+        - "Zsh | Cleanup oh-my-zsh install script"
 
     - name: "Zsh | Run the install script"
       ansible.builtin.script:
