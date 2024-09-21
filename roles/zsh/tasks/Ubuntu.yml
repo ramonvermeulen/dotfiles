@@ -1,0 +1,7 @@
+---
+- name: "Zsh | Ensure zsh is installed"
+  apt:
+    name: "zsh"
+    state: present
+    update-cache: yes
+  become: true

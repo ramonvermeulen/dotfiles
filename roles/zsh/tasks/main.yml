@@ -1,4 +1,58 @@
 ---
-- name: Run Ubuntu Tasks
-  ansible.builtin.import_tasks: ubuntu.yml
-  when: ansible_os_family == 'Debian'
+- name: "Zsh | Checking for Distribution Config: {{ ansible_distribution }}"
+  ansible.builtin.stat:
+    path: "{{ role_path }}/tasks/{{ ansible_distribution }}.yml"
+  register: terraform_distribution_config
+
+- name: "Zsh | Run Tasks: {{ ansible_distribution }}"
+  ansible.builtin.include_tasks: "{{ ansible_distribution }}.yml"
+  when: terraform_distribution_config.stat.exists
+
+- name: "Zsh | Change default shell to zsh if not already set"
+  user:
+    name: "{{ host_user }}"
+    shell: /bin/zsh
+  become: true
+
+- name: "Zsh | Detect oh-my-zsh"
+  ansible.builtin.stat:
+    path: "{{ ansible_user_dir }}/.oh-my-zsh"
+  register: ohmyzsh
+
+- name: "Zsh | Register oh-my-zsh state"
+  ansible.builtin.set_fact:
+    ohmyzsh_is_installed: "{{ ohmyzsh.stat.exists }}"
+
+- name: "Zsh | Debug ohmyzsh_is_installed"
+  ansible.builtin.debug:
+    var: ohmyzsh_is_installed
+
+- name: "Zsh | Install oh-my-zsh"
+  when: not ohmyzsh_is_installed
+  block:
+    - name: "Zsh | Download oh-my-zsh Install Script"
+      ansible.builtin.get_url:
+        url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+        dest: /{{ ansible_user_dir }}/oh-my-zsh.install.sh
+        force: true
+        mode: "0755"
+      notify:
+        - "Zsh | Cleanup oh-my-zsh install script"
+
+    - name: "Zsh | Run the install script"
+      ansible.builtin.script:
+        cmd: /{{ ansible_user_dir }}/oh-my-zsh.install.sh
+
+- name: "Zsh | Copy .zshrc"
+  ansible.builtin.copy:
+    src: ".zshrc"
+    dest: "{{ ansible_user_dir }}/.zshrc"
+    mode: "0644"
+
+- name: "Zsh | Copy custom zsh config"
+  ansible.builtin.copy:
+    dest: "{{ ansible_user_dir }}/.config/"
+    src: "zsh"
+    mode: "0644"
+    directory_mode: "0755"
+    force: true

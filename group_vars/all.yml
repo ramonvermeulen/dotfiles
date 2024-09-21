@@ -1,2 +1,6 @@
 default_roles:
   - zsh
+  - btop
+
+git_user_name: "ramonvermeulen"
+git_user_email: "ramonvermeulen98@gmail.com"

@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 #handy
 alias _ip="curl ifconfig.me"
 
