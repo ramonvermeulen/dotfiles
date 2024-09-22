@@ -163,9 +163,9 @@ update_ansible_galaxy $ID
 __task "Running playbook"; _task_done
 if [[ -f $VAULT_SECRET ]]; then
   printf "${OVERWRITE}${LGREEN} [✓]  ${LGREEN}Running playbook with vault secret${NC}\n"
-  ansible-playbook --vault-password-file $VAULT_SECRET "$DOTFILES_DIR/main.yml" "$@"
+  ansible-playbook --vault-password-file $VAULT_SECRET "$DOTFILES_DIR/main.yml" "$@" --ask-become-pass
 else
-  ansible-playbook "$DOTFILES_DIR/main.yml" "$@"
+  ansible-playbook "$DOTFILES_DIR/main.yml" "$@" --ask-become-pass
 fi
 
 popd 2>&1 > /dev/null

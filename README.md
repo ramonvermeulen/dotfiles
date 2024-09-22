@@ -1,5 +1,5 @@
 # dotfiles
-Repository containing my personal .dotfiles configuration, making it easy to set-up and synchronize 
+Repository containing my personal .dotfiles configurations, making it easy to set-up and synchronize 
 my developer environment across machines. This set-up is hugely inspired by the [**TechDufus**][2] dotfiles 
 set-up which can be found [**here**][2]. Basically most concepts and config is copied from his repo 
 and modified / tweaked / stripped to my own liking. The goal is to provide a fully automated and maintainable
@@ -7,12 +7,42 @@ and modified / tweaked / stripped to my own liking. The goal is to provide a ful
 standard Ubuntu installations.
 
 # Ansible
+A huge part of the set-up makes use of [**Ansible**][3] (first run of the dotfiles script it will install Ansible itself).
+
 
 # Installation
+This script will install Ansible, synchronize the git repo, and run the Ansible playbook. After the first run the script
+will be added to the `$PATH` so that from then on it can always be ran via `dotfiles`.
+
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/ramonvermeulen/dotfiles/main/bin/dotfiles)"
+```
+
+# Updates
+To update your environment run the `dotfiles` command in your shell:
+
+```bash
+dotfiles
+```
+
+This will handle the following tasks:
+
+- Verify Ansible is up-to-date
+- Generate SSH keys and add to `~/.ssh/authorized_keys`
+- Clone this repository locally to `~/.dotfiles`
+- Verify any `ansible-galaxy` plugins are updated
+- Run this playbook with the values in `~/.config/dotfiles/group_vars/all.yaml`
+
+This `dotfiles` command is available to you after the first use of this repo, as it adds this repo's `bin` directory to your path, allowing you to call `dotfiles` from anywhere.
+
+Any flags or arguments you pass to the `dotfiles` command are passed as-is to the `ansible-playbook` command.
+
+For Example: Running the tmux tag with verbosity
+```bash
+dotfiles -t btop -vvv
 ```
 
 <!-- These are the reference links used in this document -->
 [1]: https://github.com/TechDufus/
 [2]: https://github.com/TechDufus/dotfiles
+[3]: https://github.com/ansible/ansible
