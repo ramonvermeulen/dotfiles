@@ -6,6 +6,7 @@ default_roles:
   - pyenv
   - system
   - k8s
+  - k9s
 
 git_user_name: "ramonvermeulen"
 git_user_email: "ramonvermeulen98@gmail.com"
