@@ -1,3 +1,12 @@
 ---
 - name: "System | Run Tasks: {{ ansible_distribution }}"
   ansible.builtin.include_tasks: "{{ ansible_distribution }}.yml"
+
+- name: "System | Create work and personal directories if not exists"
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+  loop:
+    - "~/projects/work"
+    - "~/projects/personal"
