@@ -1,5 +1,15 @@
 ---
+- name: "Pyenv | Detect pyenv"
+  ansible.builtin.stat:
+    path: "{{ ansible_user_dir }}/.pyenv"
+  register: pyenv
+
+- name: "Pyenv | Register pyenv"
+  ansible.builtin.set_fact:
+    pyenv_is_installed: "{{ pyenv.stat.exists }}"
+
 - name: "Pyenv | Install"
+  when: not pyenv_is_installed
   block:
     - name: "Pyenv | Download pyenv install script"
       ansible.builtin.get_url:

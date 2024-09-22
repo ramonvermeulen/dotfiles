@@ -1,4 +1,5 @@
 export ZSH="$HOME/.oh-my-zsh"
+export PYENV_ROOT="$HOME/.pyenv"
 
 ZSH_THEME="agnoster"
 
@@ -10,3 +11,5 @@ for file in $HOME/.config/zsh/*.zsh; do
   source "$file"
 done
 
+
+eval "$(pyenv init -)"
