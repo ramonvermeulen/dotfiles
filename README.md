@@ -42,7 +42,25 @@ For Example: Running the tmux tag with verbosity
 dotfiles -t btop -vvv
 ```
 
+### vault.secret
+
+The `vault.secret` file allows you to encrypt values with `Ansible vault` and store them securely in source control. Create a file located at `~/.config/dotfiles/vault.secret` with a secure password in it.
+
+```bash
+vim ~/.ansible-vault/vault.secret
+```
+
+To then encrypt values with your vault password use the following:
+
+```bash
+$ ansible-vault encrypt_string --vault-password-file $HOME/.ansible-vault/vault.secret "mynewsecret" --name "MY_SECRET_VAR"
+$ cat myfile.conf | ansible-vault encrypt_string --vault-password-file $HOME/.ansible-vault/vault.secret --stdin-name "myfile"
+```
+
+> NOTE: This file will automatically be detected by the playbook when running `dotfiles` command to decrypt values. Read more on Ansible Vault [**here**][4].
+
 <!-- These are the reference links used in this document -->
 [1]: https://github.com/TechDufus/
 [2]: https://github.com/TechDufus/dotfiles
 [3]: https://github.com/ansible/ansible
+[4]: https://docs.ansible.com/ansible/latest/user_guide/vault.html
