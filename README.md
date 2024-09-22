@@ -37,7 +37,7 @@ This `dotfiles` command is available to you after the first use of this repo, as
 
 Any flags or arguments you pass to the `dotfiles` command are passed as-is to the `ansible-playbook` command.
 
-For Example: Running the tmux tag with verbosity
+For Example: Running the btop tag with verbosity
 ```bash
 dotfiles -t btop -vvv
 ```
