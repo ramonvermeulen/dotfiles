@@ -4,7 +4,7 @@
     - name: "Pyenv | Download pyenv install script"
       ansible.builtin.get_url:
         url: https://pyenv.run
-        destination: /{{ ansible_user_dir }}/pyenv.install.sh
+        dest: /{{ ansible_user_dir }}/pyenv.install.sh
         force: true
         mode: "0755"
       notify:
