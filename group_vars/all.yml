@@ -9,6 +9,7 @@ default_roles:
   - k9s
   - fonts
   - alacritty
+  - desktop-apps
 
 git_user_name: "ramonvermeulen"
 git_user_email: "ramonvermeulen98@gmail.com"

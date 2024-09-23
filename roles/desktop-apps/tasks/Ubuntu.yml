@@ -1,0 +1,26 @@
+# todo(ramon): find way to check if app already is installed, then skip
+- name: "Desktop Apps | install Chrome"
+  apt:
+    deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  become: true
+
+- name: "Desktop Apps | install Slack"
+  apt: # todo(ramon): find way to dynamically get stable release
+    deb: https://downloads.slack-edge.com/desktop-releases/linux/x64/4.39.95/slack-desktop-4.39.95-amd64.deb
+  become: true
+
+- name: "Desktop Apps | add gpg key for spotify"
+  ansible.builtin.apt_key:
+    url: "https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg"
+    state: present
+    keyring: "/etc/apt/trusted.gpg.d/spotify.gpg"
+  become: true
+
+- name: "Desktop Apps | install Spotify"
+  ansible.builtin.apt:
+    name:
+      - spotify-client
+    state: present
+  become: true
+
+

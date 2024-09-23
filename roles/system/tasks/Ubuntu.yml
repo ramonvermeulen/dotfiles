@@ -26,6 +26,10 @@
       - make
       - tk-dev
       - xz-utils
-      - zlib1g-dev 
+      - zlib1g-dev
+      # general software
+      - vim 
+      - gnome-tweaks # remap esc/caps
+      - deb
     state: present
   become: true
