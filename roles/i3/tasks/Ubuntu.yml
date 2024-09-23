@@ -1,0 +1,24 @@
+---
+- name: "i3 | Install"
+  ansible.builtin.apt:
+    name: i3 
+    state: present
+  become: true
+
+- name: "i3 | Install feh (wallpaper dependency)"
+  ansible.builtin.apt:
+    name: feh
+    state: present
+  become: true
+
+- name: "i3 | Install picom (compositor)"
+  ansible.builtin.apt:
+    name: picom
+    state: present
+  become: true
+
+- name: "i3 | Install polybar (top bar)"
+  ansible.builtin.apt:
+    name: polybar
+    state: present
+  become: true
