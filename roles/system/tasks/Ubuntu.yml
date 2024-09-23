@@ -30,6 +30,7 @@
       # general software
       - vim 
       - gnome-tweaks # remap esc/caps
-      - deb
+      # for WSL instances this is hany
+      - ubuntu-desktop-minimal
     state: present
   become: true

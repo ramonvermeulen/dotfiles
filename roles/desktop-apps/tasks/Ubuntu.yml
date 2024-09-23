@@ -1,13 +1,23 @@
 # todo(ramon): find way to check if app already is installed, then skip
+- name: "Desktop Apps | check Chrome installation"
+  shell: "dpkg --get-selections | grep google-chrome"
+  register: chrome_installed
+
 - name: "Desktop Apps | install Chrome"
   apt:
     deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   become: true
+  when: chrome_installed.rc == 1
+
+- name: "Desktop Apps | check Chrome installation"
+  shell: "dpkg --get-selections | grep slack-desktop"
+  register: slack_installed
 
 - name: "Desktop Apps | install Slack"
   apt: # todo(ramon): find way to dynamically get stable release
     deb: https://downloads.slack-edge.com/desktop-releases/linux/x64/4.39.95/slack-desktop-4.39.95-amd64.deb
   become: true
+  when: slack_installed.rc == 1
 
 - name: "Desktop Apps | add gpg key for spotify"
   ansible.builtin.apt_key:
@@ -16,11 +26,17 @@
     keyring: "/etc/apt/trusted.gpg.d/spotify.gpg"
   become: true
 
+- name: "Desktop Apps | Add Spotify APT repository"
+  ansible.builtin.lineinfile:
+    path: "/etc/apt/sources.list.d/spotify.list"
+    line: "deb http://repository.spotify.com stable non-free"
+    create: yes
+    mode: '0644'
+
 - name: "Desktop Apps | install Spotify"
   ansible.builtin.apt:
     name:
       - spotify-client
     state: present
+    update_cache: true
   become: true
-
-
