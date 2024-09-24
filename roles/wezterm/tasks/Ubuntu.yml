@@ -10,6 +10,7 @@
     repo: 'deb [signed-by=/usr/share/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *'
     filename: 'wezterm'
     state: present
+  become: true
 
 - name: "Wezterm | install"
   ansible.builtin.apt:
