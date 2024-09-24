@@ -1,0 +1,21 @@
+- name: "Wezterm | add gpg key for spotify"
+  ansible.builtin.apt_key:
+    url: "https://apt.fury.io/wez/gpg.key"
+    state: present
+    keyring: "/usr/share/keyrings/wezterm-fury.gpg"
+  become: true
+
+- name: "Wezterm | Add APT repository"
+  ansible.builtin.lineinfile:
+    path: "/etc/apt/sources.list.d/wezterm.list"
+    line: "deb [signed-by=/usr/share/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *"
+    create: yes
+    mode: '0644'
+
+- name: "Wezterm | install"
+  ansible.builtin.apt:
+    name:
+      - wezterm-nightly # as of now only (stable) one supported for ubuntu 24_04
+    state: present
+    update_cache: true
+  become: true
