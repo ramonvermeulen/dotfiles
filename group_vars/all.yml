@@ -11,6 +11,7 @@ default_roles:
   - alacritty
   - desktop-apps
   - i3
+  - wezterm
 
 git_user_name: "ramonvermeulen"
 git_user_email: "ramonvermeulen98@gmail.com"
