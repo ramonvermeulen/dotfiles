@@ -187,7 +187,11 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# custom hotkeys
+bindsym $mod+Shift+Escape exec --no-startup-id i3lock -i ~/.config/wallpaper.png
 
+# disable screen blanking
+exec --no-startup-id xset s off -dpms
 exec_always --no-startup-id ~/.config/polybar/launch.sh &
 exec_always --no-startup-id feh --bg-scale --auto-zoom ~/.config/wallpaper.jpg
 exec_always --no-startup-id picom &
