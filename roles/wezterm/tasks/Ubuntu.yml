@@ -1,4 +1,4 @@
-- name: "Wezterm | add gpg key for spotify"
+- name: "Wezterm | add gpg key"
   ansible.builtin.apt_key:
     url: "https://apt.fury.io/wez/gpg.key"
     state: present
@@ -6,11 +6,10 @@
   become: true
 
 - name: "Wezterm | Add APT repository"
-  ansible.builtin.lineinfile:
-    path: "/etc/apt/sources.list.d/wezterm.list"
-    line: "deb [signed-by=/usr/share/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *"
-    create: yes
-    mode: '0644'
+  ansible.builtin.apt_repository:
+    repo: 'deb [signed-by=/usr/share/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *'
+    filename: 'wezterm'
+    state: present
 
 - name: "Wezterm | install"
   ansible.builtin.apt:
