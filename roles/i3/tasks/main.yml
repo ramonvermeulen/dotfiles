@@ -32,4 +32,8 @@
     dest: "{{ ansible_user_dir }}/.Xresources"
     mode: "0755"
 
-
+- name: "I3 | Copy over change wallpaper script"
+  ansible.builtin.copy:
+    src: "replace_wallpaper.sh"
+    dest: "{{ ansible_user_dir }}/replace_wallpaper.sh"
+    mode: "0755"

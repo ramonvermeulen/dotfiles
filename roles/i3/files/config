@@ -35,7 +35,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 # set US keyboard as default keyboard 
-exec_always --no-startup-id setxkbmap -layout us
+exec_always --no-startup-id setxkbmap -layout us -option caps:swapescape
 
 # exec "xrandr --dpi 276 --output eDP-1 --mode 3840x2400 --output HDMI-1 --scale 2x2 --pos 3840x0"
 # Use pactl to adjust volume in PulseAudio.
