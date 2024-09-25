@@ -17,8 +17,11 @@
     state: present
   become: true
 
-- name: "i3 | Install polybar (top bar)"
-  ansible.builtin.apt:
-    name: polybar
-    state: present
+- name: "i3 | Install bumblebee-status (top bar)"
+  ansible.builtin.git:
+    repo: "https://github.com/tobi-wan-kenobi/bumblebee-status"
+    dest: "{{ ansible_user_dir }}/.config/bumblebee-status"
+    version: "main"
+    update: yes
   become: true
+

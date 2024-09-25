@@ -8,18 +8,6 @@
     dest: "{{ ansible_user_dir }}/.config/i3/config"
     mode: "0755"
 
-- name: "I3 | Copy over polybar config"
-  ansible.builtin.copy:
-    src: "config.ini"
-    dest: "{{ ansible_user_dir }}/.config/polybar/config.ini"
-    mode: "0755"
-
-- name: "I3 | Copy over polybar launch.sh"
-  ansible.builtin.copy:
-    src: "launch.sh"
-    dest: "{{ ansible_user_dir }}/.config/polybar/launch.sh"
-    mode: "0755"
-
 - name: "I3 | Copy over .xinitrc"
   ansible.builtin.copy:
     src: ".xinitrc"

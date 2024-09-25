@@ -40,3 +40,9 @@
     state: present
     update_cache: true
   become: true
+
+- name: "Desktop Apps | install IntelliJ Idea"
+  community.general.snap:
+    name: intellij-idea-ultimate
+    classic: true
+  become: true

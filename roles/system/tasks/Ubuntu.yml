@@ -32,5 +32,7 @@
       - gnome-tweaks # remap esc/caps
       # for WSL instances this is hany
       - ubuntu-desktop-minimal
+      # some dependencies for the i3 setup
+      - brightnessctl
     state: present
   become: true

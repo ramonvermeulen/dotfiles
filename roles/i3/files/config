@@ -43,9 +43,6 @@ set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioMute exec amixer sset 'Master' toggle
 bindsym XF86AudioLowerVolume exec amixer sset 'Master' 5%-
 bindsym XF86AudioRaiseVolume exec amixer sset 'Master' 5%+
-bindsym XF86MonBrightnessUp exec --no-startup-id bash -c 'b=$(xrandr --verbose | grep -i brightness | head -n 1 | cut -d" " -f2) && b2=$(echo -e "import math\nf = lambda x: (1 - 1/(1+math.exp(4*x-2)))\nprint(\\\"%.2f\\\" % f(0.1+$b))" | python) && xrandr --output $(xrandr -q | grep \' connected\' | head -n 1 | cut -d ' ' -f1) --brightness $b2'
-
-bindsym XF86MonBrightnessDown exec --no-startup-id bash -c 'b=$(xrandr --verbose | grep -i brightness | head -n 1 | cut -d" " -f2) && b2=$(echo -e "import math\nf = lambda x: (1 - 1/(1+math.exp(4*x-2)))\nprint(\\\"%.2f\\\" % f(-0.1+$b))" | python) && xrandr --output $(xrandr -q | grep \' connected\' | head -n 1 | cut -d ' ' -f1) --brightness $b2'
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -189,11 +186,19 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# fix for brightnessctl: https://github.com/i3/i3/discussions/4763
+bar {
+	status_command ~/.config/bumblebee-status/bumblebee-status \
+	-m spotify brightness cpu time date pipewire xrandr bluetooth2 battery \
+	-p time.format="%H:%M" \
+	-t gruvbox # -d --log-file <path>   | e.g. put in log statements for debugging purposes
+	position top
+}
+
 # custom hotkeys
 bindsym $mod+Shift+Escape exec --no-startup-id i3lock -i ~/.config/wallpaper.png
 
 # disable screen blanking
 exec --no-startup-id xset s off -dpms
-exec_always --no-startup-id ~/.config/polybar/launch.sh &
 exec_always --no-startup-id feh --bg-scale --auto-zoom ~/.config/wallpaper.jpg
 exec_always --no-startup-id picom &
