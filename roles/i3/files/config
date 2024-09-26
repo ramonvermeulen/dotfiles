@@ -187,7 +187,6 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 include ~/.config/i3/i3-gaps-config
-include ~/.config/i3/startup-config
 
 # fix for brightnessctl: https://github.com/i3/i3/discussions/4763
 bar {
@@ -217,3 +216,6 @@ exec --no-startup-id ~/replace_wallpaper.sh
 exec --no-startup-id xset s off -dpms
 exec_always --no-startup-id feh --bg-scale --auto-zoom ~/.config/wallpaper.jpg
 exec_always --no-startup-id picom &
+
+# run startup-config (startup apps) as last
+include ~/.config/i3/startup-config
