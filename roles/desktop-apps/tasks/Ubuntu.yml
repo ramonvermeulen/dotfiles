@@ -1,24 +1,22 @@
-# todo(ramon): find way to check if app already is installed, then skip
-- name: "Desktop Apps | check Chrome installation"
-  shell: "dpkg --get-selections | grep google-chrome"
-  register: chrome_installed
+# Ensure that Ansible gathers facts about installed packages
+- name: "Gather installed package facts"
+  ansible.builtin.package_facts:
 
-- name: "Desktop Apps | install Chrome"
+# Check and install Google Chrome
+- name: "Desktop Apps | install Chrome if not installed"
   apt:
     deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   become: true
-  when: chrome_installed.rc == 1
+  when: "'google-chrome-stable' not in ansible_facts.packages"
 
-- name: "Desktop Apps | check Chrome installation"
-  shell: "dpkg --get-selections | grep slack-desktop"
-  register: slack_installed
-
-- name: "Desktop Apps | install Slack"
-  apt: # todo(ramon): find way to dynamically get stable release
+# Check and install Slack
+- name: "Desktop Apps | install Slack if not installed"
+  apt:
     deb: https://downloads.slack-edge.com/desktop-releases/linux/x64/4.39.95/slack-desktop-4.39.95-amd64.deb
   become: true
-  when: slack_installed.rc == 1
+  when: "'slack-desktop' not in ansible_facts.packages"
 
+# Add GPG key for Spotify
 - name: "Desktop Apps | add gpg key for spotify"
   ansible.builtin.apt_key:
     url: "https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg"
@@ -26,6 +24,7 @@
     keyring: "/etc/apt/trusted.gpg.d/spotify.gpg"
   become: true
 
+# Add Spotify APT repository
 - name: "Desktop Apps | Add Spotify APT repository"
   ansible.builtin.lineinfile:
     path: "/etc/apt/sources.list.d/spotify.list"
@@ -33,6 +32,7 @@
     create: yes
     mode: '0644'
 
+# Install Spotify
 - name: "Desktop Apps | install Spotify"
   ansible.builtin.apt:
     name:
@@ -41,6 +41,7 @@
     update_cache: true
   become: true
 
+# Install IntelliJ Idea using snap
 - name: "Desktop Apps | install IntelliJ Idea"
   community.general.snap:
     name: intellij-idea-ultimate
