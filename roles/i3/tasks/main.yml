@@ -2,6 +2,13 @@
 - name: "System | Run Tasks: {{ ansible_distribution }}"
   ansible.builtin.include_tasks: "{{ ansible_distribution }}.yml"
 
+- name: "I3 | Ensure config directory exists"
+  ansible.builtin.file:
+    path: "{{ ansible_config_dir }}/.config/i3"
+    state: "directory"
+    mode: "0755"
+  become: true
+
 - name: "I3 | Copy over i3 config"
   ansible.builtin.copy:
     src: "config"
