@@ -34,5 +34,6 @@
       - ubuntu-desktop-minimal
       # some dependencies for the i3 setup
       - brightnessctl
+      - blueman
     state: present
   become: true

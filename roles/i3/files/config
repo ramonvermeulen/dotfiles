@@ -185,6 +185,7 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+include ~/.config/i3/i3-gaps-config
 
 # fix for brightnessctl: https://github.com/i3/i3/discussions/4763
 bar {
@@ -194,6 +195,12 @@ bar {
 	-t gruvbox # -d --log-file <path>   | e.g. put in log statements for debugging purposes
 	position top
 }
+
+exec --no-startup-id i3-resurrect restore -w 1
+exec --no-startup-id i3-resurrect restore -w 2
+exec --no-startup-id i3-resurrect restore -w 3
+exec --no-startup-id i3-resurrect restore -w 8
+exec --no-startup-id i3-resurrect restore -w 9
 
 # custom hotkeys
 bindsym $mod+Shift+Escape exec --no-startup-id i3lock -i ~/.config/wallpaper.png

@@ -1,3 +1,24 @@
 ---
 - name: "Pyenv | Run Tasks: {{ ansible_distribution }}"
   ansible.builtin.include_tasks: "{{ ansible_distribution }}.yml"
+
+- name: "Pyenv | Check the current global pyenv python version"
+  shell: "pyenv version-name"
+  register: current_python_version
+  changed_when: false
+
+- name: "Pyenv | Get the latest Python version from pyenv"
+  shell: "pyenv install --list | grep -E '^[[:space:]]*[0-9]+(\\.[0-9]+)*$' | tail -1"
+  register: latest_python_version
+  changed_when: false
+
+- name: "Pyenv | found newer python version, will install it and set as global"
+  shell: |
+    pyenv install {{ latest_python_version.stdout.strip() }} && \
+    pyenv global {{ latest_python_version.stdout.strip() }}
+  when: current_python_version.stdout.strip() != latest_python_version.stdout.strip()
+
+- name: "Pyenv Pip | Install i3-resurrect"
+  ansible.builtin.pip:
+    name: i3-resurrect
+    state: latest

@@ -16,6 +16,13 @@
     mode: "0755"
   become: true
 
+- name: "I3 | Copy over i3 gaps config"
+  ansible.builtin.copy:
+    src: "i3-gaps-config"
+    dest: "{{ ansible_user_dir }}/.config/i3/i3-gaps-config"
+    mode: "0755"
+  become: true
+
 - name: "I3 | Copy over .xinitrc"
   ansible.builtin.copy:
     src: ".xinitrc"
