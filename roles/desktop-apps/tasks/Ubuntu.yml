@@ -1,5 +1,5 @@
 # Ensure that Ansible gathers facts about installed packages
-- name: "Gather installed package facts"
+- name: "Desktop Apps | Gather installed package facts"
   ansible.builtin.package_facts:
 
 # Check and install Google Chrome
@@ -31,6 +31,7 @@
     line: "deb http://repository.spotify.com stable non-free"
     create: yes
     mode: '0644'
+  become: true
 
 # Install Spotify
 - name: "Desktop Apps | install Spotify"
