@@ -43,3 +43,19 @@
     dest: "{{ ansible_user_dir }}/replace_wallpaper.sh"
     mode: "0755"
   become: true
+
+- name: "I3 | Ensure picom directory exists"
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.config/picom"
+    state: "directory"
+    mode: "0755"
+  become: true
+
+- name: "I3 | Copy over picom conf"
+  ansible.builtin.copy:
+    src: "picom.conf"
+    dest: "{{ ansible_user_dir }}/.config/picom/picom.conf"
+    mode: "0755"
+  become: true
+
+
