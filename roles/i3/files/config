@@ -196,6 +196,11 @@ bar {
 	position top
 }
 
+# disable borders
+default_border pixel 0 
+default_floating_border pixel 0 
+for_window [class="^.*"] border pixel 0 
+
 exec --no-startup-id i3-resurrect restore -w 1
 exec --no-startup-id i3-resurrect restore -w 2
 exec --no-startup-id i3-resurrect restore -w 3
