@@ -185,7 +185,9 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+
 include ~/.config/i3/i3-gaps-config
+include ~/.config/i3/startup-config
 
 # fix for brightnessctl: https://github.com/i3/i3/discussions/4763
 bar {
