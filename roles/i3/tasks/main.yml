@@ -9,7 +9,15 @@
     mode: "0755"
   become: true
 
-- name: "I3 | Copy over i3 config"
+- name: "I3 | Copy over i3 layout configs"
+  synchronize:
+    src: "layouts"
+    dest: "{{ ansible_user_dir }}/.config/i3"
+    recursive: true
+    delete: false
+  become: true
+
+- name: "I3 | Copy over i3 config" 
   ansible.builtin.copy:
     src: "config"
     dest: "{{ ansible_user_dir }}/.config/i3/config"
@@ -30,13 +38,6 @@
     mode: "0755"
   become: true
 
-- name: "I3 | Copy over i3 layout configs"
-  synchronize:
-    src: "layouts"
-    dest: "{{ ansible_user_dir }}/.config/i3"
-    recursive: true
-    delete: false
-  become: true
 
 - name: "I3 | Copy over .xinitrc"
   ansible.builtin.copy:
