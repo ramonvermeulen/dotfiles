@@ -202,11 +202,9 @@ default_border pixel 0
 default_floating_border pixel 0 
 for_window [class="^.*"] border pixel 0 
 
-exec --no-startup-id i3-resurrect restore -w 1
-exec --no-startup-id i3-resurrect restore -w 2
-exec --no-startup-id i3-resurrect restore -w 3
-exec --no-startup-id i3-resurrect restore -w 8
-exec --no-startup-id i3-resurrect restore -w 9
+# move workspace to second monitor
+bindsym $mod+Shift+greater move workspace to output right
+bindsym $mod+Shift+less move workspace to output left
 
 # custom hotkeys
 bindsym $mod+Shift+Escape exec --no-startup-id i3lock -i ~/.config/wallpaper.png
