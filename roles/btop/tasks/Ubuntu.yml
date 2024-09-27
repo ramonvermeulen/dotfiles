@@ -1,6 +1,6 @@
 ---
-- name: "BTOP | Install"
-  ansible.builtin.apt:
-    name: bpytop
+- name: "BTOP | Install btop c++ variant"
+  community.general.snap:
+    name: btop
     state: present
   become: true

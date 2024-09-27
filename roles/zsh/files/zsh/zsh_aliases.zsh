@@ -2,7 +2,6 @@
 
 #handy
 alias _ip="curl ifconfig.me"
-alias btop=bpytop
 
 # neovim
 alias vi=nvim
