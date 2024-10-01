@@ -17,8 +17,3 @@
     pyenv install {{ latest_python_version.stdout.strip() }} && \
     pyenv global {{ latest_python_version.stdout.strip() }}
   when: current_python_version.stdout.strip() != latest_python_version.stdout.strip()
-
-- name: "Pyenv Pip | Install i3-resurrect"
-  ansible.builtin.pip:
-    name: i3-resurrect
-    state: latest
