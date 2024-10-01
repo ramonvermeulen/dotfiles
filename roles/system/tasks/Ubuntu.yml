@@ -36,5 +36,7 @@
       # some dependencies for the i3 setup
       - brightnessctl
       - blueman
+      # GUI for xrandr e.g. handy when on multiple monitors
+      - arandr
     state: present
   become: true
