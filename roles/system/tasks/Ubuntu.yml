@@ -28,6 +28,7 @@
       - xz-utils
       - zlib1g-dev
       # general software
+      - default-jre
       - vim 
       - gnome-tweaks # remap esc/caps
       # for WSL instances this is hany

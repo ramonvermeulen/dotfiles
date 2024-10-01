@@ -11,5 +11,6 @@ for file in $HOME/.config/zsh/*.zsh; do
   source "$file"
 done
 
+export JAVA_HOME="/usr/bin/java"
 
 eval "$(pyenv init -)"
