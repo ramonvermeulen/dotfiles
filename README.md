@@ -18,6 +18,8 @@ will be added to the `$PATH` so that from then on it can always be ran via `dotf
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/ramonvermeulen/dotfiles/main/bin/dotfiles)"
 ```
 
+> NOTE: Might require one restart after running the zsh role 
+
 # Updates
 To update your environment run the `dotfiles` command in your shell:
 
