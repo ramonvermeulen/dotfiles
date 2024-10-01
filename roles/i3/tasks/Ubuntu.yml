@@ -11,11 +11,74 @@
     state: present
   become: true
 
-- name: "i3 | Install picom (compositor)"
+- name: "i3 | Check for picom binary in /usr/bin"
+  stat:
+    path: /usr/bin/picom
+  register: picom_check
+
+- name: "i3 | picom build tools"
   ansible.builtin.apt:
-    name: picom
+    name: "{{ item }}"
     state: present
+    update_cache: yes
+  loop:
+    - libconfig-dev 
+    - libdbus-1-dev 
+    - libegl-dev 
+    - libev-dev 
+    - libgl-dev 
+    - libepoxy-dev 
+    - libpcre2-dev 
+    - libpixman-1-dev 
+    - libx11-xcb-dev 
+    - libxcb1-dev 
+    - libxcb-composite0-dev 
+    - libxcb-damage0-dev 
+    - libxcb-glx0-dev 
+    - libxcb-image0-dev 
+    - libxcb-present-dev 
+    - libxcb-randr0-dev 
+    - libxcb-render0-dev 
+    - libxcb-render-util0-dev 
+    - libxcb-shape0-dev 
+    - libxcb-util-dev 
+    - libxcb-xfixes0-dev 
+    - meson 
+    - ninja-build 
+    - uthash-dev
+    - cmake
+  when: not picom_check.stat.exists
+
+- name: "i3 | install picom - clone repo (build from source)"
+  ansible.builtin.git:
+    repo: "https://github.com/yshui/picom"
+    dest: "/tmp/picom"
+    version: "main"
+    update: yes
   become: true
+  when: not picom_check.stat.exists
+
+- name: "i3 | build picom from source using ninja"
+  command: "meson setup --buildtype=release build"
+  args:
+    chdir: "/tmp/picom"
+  become: true
+  when: not picom_check.stat.exists
+
+- name: "i3 | build picom from source using ninja"
+  command: "ninja -C build"
+  args:
+    chdir: "/tmp/picom"
+  become: true
+  when: not picom_check.stat.exists
+
+- name: "i3 | move picom binary to /usr/bin"
+  copy:
+    src: "/tmp/picom/build/bin/picom"
+    dest: "/usr/bin/picom"
+    mode: "0755"
+  become: true
+  when: not picom_check.stat.exists
 
 - name: "i3 | Install bumblebee-status (top bar)"
   ansible.builtin.git:
