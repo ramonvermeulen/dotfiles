@@ -74,7 +74,7 @@
 
 - name: "i3 | move picom binary to /usr/bin"
   copy:
-    src: "/tmp/picom/build/bin/picom"
+    src: "/tmp/picom/build/src/picom"
     dest: "/usr/bin/picom"
     mode: "0755"
   become: true
