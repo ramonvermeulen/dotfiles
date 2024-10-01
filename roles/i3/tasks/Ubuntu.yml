@@ -53,7 +53,7 @@
   ansible.builtin.git:
     repo: "https://github.com/yshui/picom"
     dest: "/tmp/picom"
-    version: "main"
+    version: "next"
     update: yes
   become: true
   when: not picom_check.stat.exists
