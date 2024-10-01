@@ -1,10 +1,10 @@
 default_roles:
   - zsh
+  - system
   - btop
   - git
   - terraform
   - pyenv
-  - system
   - k8s
   - k9s
   - fonts
