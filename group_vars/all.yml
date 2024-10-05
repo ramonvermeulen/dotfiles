@@ -12,6 +12,7 @@ default_roles:
   - desktop-apps
   - i3
   - wezterm
+  - lazygit
 
 git_user_name: "ramonvermeulen"
 git_user_email: "ramonvermeulen98@gmail.com"
