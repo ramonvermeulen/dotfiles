@@ -208,12 +208,14 @@ bindsym $mod+Shift+less move workspace to output left
 
 # custom hotkeys
 bindsym $mod+Shift+Escape exec --no-startup-id i3lock -i ~/.config/wallpaper.png
+bindsym $mod+Shift+P exec --no-startup-id ~/replace_wallpaper.sh
 
 # disable screen blanking
 exec --no-startup-id ~/replace_wallpaper.sh
 exec --no-startup-id xset s off -dpms
 exec_always --no-startup-id feh --bg-scale --auto-zoom ~/.config/wallpaper.jpg
-exec_always --no-startup-id picom &
+# temporary disabled picom -> performance overhead
+# exec_always --no-startup-id picom &
 
 # set display resolution
 exec_always --no-startup-id xrandr --input eDP-1 --mode 1920x1200
