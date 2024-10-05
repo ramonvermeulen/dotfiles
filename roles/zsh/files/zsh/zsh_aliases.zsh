@@ -7,6 +7,9 @@ alias _ip="curl ifconfig.me"
 alias vi=nvim
 alias vim=nvim
 
+# lazygit
+alias g=lazygit
+
 # os
 alias up="sudo apt-get update && sudo apt-get upgrade"
 
