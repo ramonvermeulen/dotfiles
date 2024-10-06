@@ -38,6 +38,7 @@
       - blueman
       # GUI for xrandr e.g. handy when on multiple monitors
       - arandr
-      - xclip 
+      - xclip
+      - ripgrep
     state: present
   become: true
