@@ -1,6 +1,6 @@
-local lsp_servers = { "lua_ls", "pyright" }
-local formatters = { "stylua" }
-local linters = {}
+local lsp_servers = { "lua_ls", "pyright", "gopls" }
+local formatters = { "stylua", "gofumpt" }
+local linters = { "golangci-lint" }
 
 return {
     {
@@ -29,7 +29,7 @@ return {
                 })
             end
 
-            vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, {})
+            vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
             vim.keymap.set("n", "<leader>r", function()
                 local cmdId
                 cmdId = vim.api.nvim_create_autocmd({ "CmdlineEnter" }, {
