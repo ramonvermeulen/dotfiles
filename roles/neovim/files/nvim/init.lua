@@ -5,4 +5,3 @@ vim.cmd("set shiftwidth=4")
 
 -- setup packagemanager
 require("config.lazy")
-

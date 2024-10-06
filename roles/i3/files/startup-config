@@ -1,5 +1,5 @@
 exec --no-startup-id "sleep 2; i3-msg 'workspace 1: 🌐; append_layout ~/.config/i3/workspace-1.json; exec google-chrome'"
-exec --no-startup-id "sleep 4; i3-msg 'workspace 2: Terminal; append_layout ~/.config/i3/workspace-2.json; exec wezterm'"
-exec --no-startup-id "sleep 6; i3-msg 'workspace 3: Coding; append_layout ~/.config/i3/workspace-3.json; exec wezterm'"
-exec --no-startup-id "sleep 8; i3-msg 'workspace 8: spotify; append_layout ~/.config/i3/workspace-8.json; exec spotify'"
+exec --no-startup-id "sleep 4; i3-msg 'workspace 2: Coding; append_layout ~/.config/i3/workspace-2.json; exec wezterm'"
+exec --no-startup-id "sleep 6; i3-msg 'workspace 3: Terminal; append_layout ~/.config/i3/workspace-3.json; exec wezterm'"
+exec --no-startup-id "sleep 8; i3-msg 'workspace 8: Spotify; append_layout ~/.config/i3/workspace-8.json; exec spotify'"
 exec --no-startup-id "sleep 12; i3-msg 'workspace 9: Slack; append_layout ~/.config/i3/workspace-9.json; exec slack'"
