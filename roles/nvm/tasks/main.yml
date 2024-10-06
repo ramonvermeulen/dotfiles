@@ -1,0 +1,13 @@
+---
+- name: "nvm | Checking for Distribution Config: {{ ansible_distribution }}"
+  ansible.builtin.stat:
+    path: "{{ role_path }}/tasks/{{ ansible_distribution }}.yml"
+  register: nvm_distribution_config
+
+- name: "nvm | Run Tasks: {{ ansible_distribution }}"
+  ansible.builtin.include_tasks: "{{ ansible_distribution }}.yml"
+  when: nvm_distribution_config.stat.exists
+
+- name: Install Node.js and npm using nvm
+  ansible.builtin.shell: >
+    . "{{ ansible_env.HOME }}/.nvm/nvm.sh" && nvm install --lts
