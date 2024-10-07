@@ -152,10 +152,22 @@ fi
 
 if ! [[ -d "$DOTFILES_DIR" ]]; then
   __task "Cloning repository"
-  _cmd "git clone --quiet https://github.com/ramonvermeulen/dotfiles.git $DOTFILES_DIR"
+  _cmd "git clone --quiet --recurse-submodules https://github.com/ramonvermeulen/dotfiles.git $DOTFILES_DIR"
 else
   __task "Updating repository"
   _cmd "git -C $DOTFILES_DIR pull --quiet"
+  
+  # Update submodules
+  __task "Updating submodules"
+  _cmd "git -C $DOTFILES_DIR submodule update --init --recursive --quiet"
+  _cmd "git -C $DOTFILES_DIR submodule foreach git pull --quiet origin master"
+
+  # Check if any submodules were updated
+  if git -C $DOTFILES_DIR submodule status | grep -qE '^[+-]'; then
+    echo "New submodule versions detected."
+  else
+    echo "All submodules are up to date."
+  fi
 fi
 
 pushd "$DOTFILES_DIR" 2>&1 > /dev/null
