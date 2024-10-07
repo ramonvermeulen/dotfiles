@@ -40,5 +40,6 @@
       - arandr
       - xclip
       - ripgrep
+      - fd-find
     state: present
   become: true
