@@ -160,7 +160,7 @@ else
   # Update submodules
   __task "Updating submodules"
   _cmd "git -C $DOTFILES_DIR submodule update --init --recursive --quiet"
-  _cmd "git -C $DOTFILES_DIR submodule foreach git pull --quiet origin master"
+  _cmd "git -C $DOTFILES_DIR submodule foreach git pull --quiet origin main"
 
   # Check if any submodules were updated
   if git -C $DOTFILES_DIR submodule status | grep -qE '^[+-]'; then
