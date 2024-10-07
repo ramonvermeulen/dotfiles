@@ -1,4 +1,4 @@
-# .dotfiles
+# dotfiles
 Repository containing my personal .dotfiles configurations, making it easy to set-up and synchronize 
 my developer environment across machines. This set-up is hugely inspired by the [**TechDufus**][2] dotfiles 
 set-up which can be found [**here**][2]. Basically most concepts and config is copied from his repo 
