@@ -6,6 +6,7 @@ default_roles:
   - terraform
   - pyenv
   - nvm
+  - gcloud
   - k8s
   - k9s
   - go

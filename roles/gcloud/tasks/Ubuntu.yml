@@ -1,0 +1,37 @@
+---
+- name: "Gcloud | Update APT cache"
+  ansible.builtin.apt:
+    update_cache: true
+  become: true
+
+- name: "Gcloud | Install dependencies"
+  ansible.builtin.apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+    state: present
+  become: true
+
+- name: "Gcloud | Add Gcloud’s official GPG key"
+  ansible.builtin.apt_key:
+    url: "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
+    keyring: "/usr/share/keyrings/cloud.google.gpg"
+    state: present
+  become: true
+
+- name: "Gcloud | Add Gcloud’s stable repository"
+  ansible.builtin.apt_repository:
+    repo: deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main
+    mode: "0644"
+  become: true
+
+- name: "Gcloud | Install gcloud CLI"
+  ansible.builtin.apt:
+    name:
+      - google-cloud-cli
+    state: present
+    update_cache: true
+  become: true
+
