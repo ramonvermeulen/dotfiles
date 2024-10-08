@@ -9,6 +9,7 @@ default_roles:
   - gcloud
   - k8s
   - k9s
+  - rust
   - go
   - fonts
   - neovim
