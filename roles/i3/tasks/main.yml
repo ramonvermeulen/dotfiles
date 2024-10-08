@@ -1,4 +1,8 @@
 ---
+# the 'stat' blocks are added so config only gets created once
+# because these are files you might want to change slightly per system
+# if you need the new upstream verison simply delete the file and Ansible
+# will recreate it for you
 - name: "System | Run Tasks: {{ ansible_distribution }}"
   ansible.builtin.include_tasks: "{{ ansible_distribution }}.yml"
 
@@ -9,20 +13,18 @@
     mode: "0755"
   become: true
 
-- name: "I3 | Copy over i3 layout configs"
-  synchronize:
-    src: "layouts"
-    dest: "{{ ansible_user_dir }}/.config/i3"
-    recursive: true
-    delete: false
-  become: true
+- name: "I3 | Check if config file exists"
+  stat:
+    path: "{{ ansible_user_dir }}/.config/i3/config"
+  register: config_file_check
 
 - name: "I3 | Copy over i3 config" 
-  ansible.builtin.copy:
+  copy:
     src: "config"
     dest: "{{ ansible_user_dir }}/.config/i3/config"
     mode: "0755"
   become: true
+  when: not config_file_check.stat.exists
 
 - name: "I3 | Copy over i3 gaps config"
   ansible.builtin.copy:
@@ -31,11 +33,17 @@
     mode: "0755"
   become: true
 
+- name: "I3 | Check if startup-config file exists"
+  stat:
+    path: "{{ ansible_user_dir }}/.config/i3/startup-config"
+  register: startup_file_check
+
 - name: "I3 | Copy over i3 startup config"
-  ansible.builtin.copy:
+  copy:
     src: "startup-config"
     dest: "{{ ansible_user_dir }}/.config/i3/startup-config"
     mode: "0755"
+  when: not startup_file_check.stat.exists
   become: true
 
 - name: "I3 | Copy over change wallpaper script"
@@ -66,9 +74,15 @@
     mode: "0755"
   become: true
 
+- name: "I3 | Check if ~/.Xresources file exists"
+  stat:
+    path: "{{ ansible_user_dir }}/.Xresources"
+  register: resources_file_check
+
 - name: "I3 | Copy over .Xresources (frac scaling)"
-  ansible.builtin.copy:
+  copy:
     src: ".Xresources"
     dest: "{{ ansible_user_dir }}/.Xresources"
     mode: "0755"
+  when: not resources_file_check.stat.exists
   become: true
