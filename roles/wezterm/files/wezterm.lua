@@ -23,25 +23,6 @@ local config = {
         },
 }
 
-config.tab_bar_style = {
-  active_tab_left = wezterm.format {
-    { Background = { Color = '#FFFFFF' } },
-    { Foreground = { Color = '#2b2042' } },
-  },
-  active_tab_right = wezterm.format {
-    { Background = { Color = '#FFFFFF' } },
-    { Foreground = { Color = '#2b2042' } },
-  },
-  inactive_tab_left = wezterm.format {
-    { Background = { Color = '#FFFFFF' } },
-    { Foreground = { Color = '#1b1032' } },
-  },
-  inactive_tab_right = wezterm.format {
-    { Background = { Color = '#FFFFFF' } },
-    { Foreground = { Color = '#1b1032' } },
-  },
-}
-
 config.window_decorations = "RESIZE"
 config.hide_tab_bar_if_only_one_tab = false
 config.tab_bar_at_bottom = true
