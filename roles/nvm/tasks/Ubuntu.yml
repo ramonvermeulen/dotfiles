@@ -37,4 +37,5 @@
       args:
         creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
   when: nvm_latest_release not in current_nvm_version.stdout|default('')
+  become: true
 

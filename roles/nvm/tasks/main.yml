@@ -11,3 +11,4 @@
 - name: Install Node.js and npm using nvm
   ansible.builtin.shell: >
     . "{{ ansible_env.HOME }}/.nvm/nvm.sh" && nvm install --lts
+  become: true
