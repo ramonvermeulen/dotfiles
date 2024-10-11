@@ -1,5 +1,6 @@
 export ZSH="$HOME/.oh-my-zsh"
 export PYENV_ROOT="$HOME/.pyenv"
+export EDITOR="nvim"
 
 ZSH_THEME="agnoster"
 
