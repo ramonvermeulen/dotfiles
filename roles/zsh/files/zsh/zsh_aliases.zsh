@@ -4,8 +4,17 @@
 alias _ip="curl ifconfig.me"
 
 # neovim
-alias vi=nvim
-alias vim=nvim
+load_node_before_nvim() {
+    if [ -s "$NVM_DIR/nvm.sh" ]; then
+        source "$NVM_DIR/nvm.sh"
+    fi
+
+    command nvim "$@"
+}
+
+alias vi=load_node_before_nvim
+alias vim=load_node_before_nvim
+alias nvim=load_node_before_nvim
 
 # lazygit
 alias g=lazygit
