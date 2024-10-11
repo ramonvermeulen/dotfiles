@@ -3,7 +3,9 @@ export PYENV_ROOT="$HOME/.pyenv"
 
 ZSH_THEME="agnoster"
 
-plugins=(git)
+zstyle ':omz:plugins:nvm' lazy yes
+
+plugins=(git nvm)
 
 source $ZSH/oh-my-zsh.sh
 
