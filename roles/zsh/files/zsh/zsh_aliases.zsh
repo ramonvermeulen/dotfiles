@@ -2,6 +2,7 @@
 
 #handy
 alias _ip="curl ifconfig.me"
+alias nvenv="python -m venv .venv"
 
 # neovim
 load_node_before_nvim() {
